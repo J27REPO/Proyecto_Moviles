@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/recipeListFragment">
+
+    <!-- Lista de recetas -->
+    <fragment
+        android:id="@+id/recipeListFragment"
+        android:name="es.uniovi.recetasasturianas.ui.list.RecipeListFragment"
+        android:label="@string/nav_recipes"
+        tools:layout="@layout/fragment_recipe_list">
+        <action
+            android:id="@+id/action_list_to_detail"
+            app:destination="@id/recipeDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!-- Detalle de receta -->
+    <fragment
+        android:id="@+id/recipeDetailFragment"
+        android:name="es.uniovi.recetasasturianas.ui.detail.RecipeDetailFragment"
+        android:label="@string/nav_recipes"
+        tools:layout="@layout/fragment_recipe_detail">
+        <argument
+            android:name="recipeId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_detail_to_webView"
+            app:destination="@id/restaurantWebViewFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!-- WebView del restaurante -->
+    <fragment
+        android:id="@+id/restaurantWebViewFragment"
+        android:name="es.uniovi.recetasasturianas.ui.webview.RestaurantWebViewFragment"
+        android:label="@string/view_restaurant"
+        tools:layout="@layout/fragment_web_view">
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </fragment>
+
+    <!-- Favoritos -->
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="es.uniovi.recetasasturianas.ui.favorites.FavoritesFragment"
+        android:label="@string/nav_favorites"
+        tools:layout="@layout/fragment_favorites">
+        <action
+            android:id="@+id/action_favorites_to_detail"
+            app:destination="@id/recipeDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!-- Ajustes -->
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="es.uniovi.recetasasturianas.ui.settings.SettingsFragment"
+        android:label="@string/nav_settings" />
+
+</navigation>

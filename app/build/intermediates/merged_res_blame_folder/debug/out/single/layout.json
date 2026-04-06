@@ -1,0 +1,30 @@
+[
+    {
+        "merged": "es.uniovi.recetasasturianas.app-mergeDebugResources-57:/layout/activity_main.xml",
+        "source": "es.uniovi.recetasasturianas.app-main-60:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/j27/.gradle/daemon/8.5/es.uniovi.recetasasturianas.app-mergeDebugResources-57:/layout/fragment_favorites.xml",
+        "source": "/home/j27/.gradle/daemon/8.5/es.uniovi.recetasasturianas.app-main-60:/layout/fragment_favorites.xml"
+    },
+    {
+        "merged": "/home/j27/.gradle/daemon/8.5/es.uniovi.recetasasturianas.app-mergeDebugResources-57:/layout/fragment_web_view.xml",
+        "source": "/home/j27/.gradle/daemon/8.5/es.uniovi.recetasasturianas.app-main-60:/layout/fragment_web_view.xml"
+    },
+    {
+        "merged": "/home/j27/.gradle/daemon/8.5/es.uniovi.recetasasturianas.app-mergeDebugResources-57:/layout/item_recipe.xml",
+        "source": "/home/j27/.gradle/daemon/8.5/es.uniovi.recetasasturianas.app-main-60:/layout/item_recipe.xml"
+    },
+    {
+        "merged": "/home/j27/.gradle/daemon/8.5/es.uniovi.recetasasturianas.app-mergeDebugResources-57:/layout/activity_main.xml",
+        "source": "/home/j27/.gradle/daemon/8.5/es.uniovi.recetasasturianas.app-main-60:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/j27/.gradle/daemon/8.5/es.uniovi.recetasasturianas.app-mergeDebugResources-57:/layout/fragment_recipe_list.xml",
+        "source": "/home/j27/.gradle/daemon/8.5/es.uniovi.recetasasturianas.app-main-60:/layout/fragment_recipe_list.xml"
+    },
+    {
+        "merged": "/home/j27/.gradle/daemon/8.5/es.uniovi.recetasasturianas.app-mergeDebugResources-57:/layout/fragment_recipe_detail.xml",
+        "source": "/home/j27/.gradle/daemon/8.5/es.uniovi.recetasasturianas.app-main-60:/layout/fragment_recipe_detail.xml"
+    }
+]

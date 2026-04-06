@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:title="@string/settings_title"
+        app:iconSpaceReserved="false">
+
+        <!-- Tema de la aplicación -->
+        <ListPreference
+            android:key="app_theme"
+            android:title="@string/pref_theme_title"
+            android:summary="@string/pref_theme_summary"
+            android:entries="@array/theme_entries"
+            android:entryValues="@array/theme_values"
+            android:defaultValue="system"
+            app:iconSpaceReserved="false"
+            app:useSimpleSummaryProvider="true" />
+
+        <!-- Intervalo de actualización -->
+        <ListPreference
+            android:key="refresh_hours"
+            android:title="@string/pref_refresh_title"
+            android:summary="@string/pref_refresh_summary"
+            android:entries="@array/refresh_hours_entries"
+            android:entryValues="@array/refresh_hours_values"
+            android:defaultValue="24"
+            app:iconSpaceReserved="false"
+            app:useSimpleSummaryProvider="true" />
+
+        <!-- Orden por defecto -->
+        <ListPreference
+            android:key="default_sort"
+            android:title="@string/pref_sort_title"
+            android:summary="@string/pref_sort_summary"
+            android:entries="@array/sort_entries"
+            android:entryValues="@array/sort_values"
+            android:defaultValue="name"
+            app:iconSpaceReserved="false"
+            app:useSimpleSummaryProvider="true" />
+
+        <!-- Ocultar sin tiempo -->
+        <SwitchPreferenceCompat
+            android:key="hide_no_time"
+            android:title="@string/pref_hide_no_time_title"
+            android:summary="@string/pref_hide_no_time_summary"
+            android:defaultValue="false"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

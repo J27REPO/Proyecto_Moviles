@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Imagen de la receta -->
+            <ImageView
+                android:id="@+id/image_recipe"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/app_name"
+                tools:src="@drawable/placeholder_recipe" />
+
+            <!-- Contenido -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Nombre -->
+                <TextView
+                    android:id="@+id/text_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?attr/textAppearanceHeadlineMedium"
+                    android:textColor="@color/text_primary"
+                    tools:text="Fabada Asturiana" />
+
+                <!-- Restaurante -->
+                <TextView
+                    android:id="@+id/text_restaurant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textAppearance="?attr/textAppearanceBodyLarge"
+                    android:textColor="@color/text_secondary"
+                    tools:text="Por Casa Fermín" />
+
+                <!-- Tiempo -->
+                <TextView
+                    android:id="@+id/text_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:textAppearance="?attr/textAppearanceLabelMedium"
+                    android:textColor="@color/primary"
+                    android:drawableStart="@drawable/ic_time_small"
+                    android:drawablePadding="6dp"
+                    tools:text="45 minutos" />
+
+                <!-- Separador -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/divider" />
+
+                <!-- Ingredientes -->
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/group_ingredients"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:constraint_referenced_ids="text_ingredients_label,text_ingredients" />
+
+                <TextView
+                    android:id="@+id/text_ingredients_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ingredients"
+                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                    android:textColor="@color/primary" />
+
+                <TextView
+                    android:id="@+id/text_ingredients"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textColor="@color/text_primary"
+                    android:lineSpacingExtra="4dp"
+                    tools:text="• Alubias\n• Chorizo\n• Morcilla" />
+
+                <!-- Separador -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/divider" />
+
+                <!-- Preparación -->
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/group_preparation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:constraint_referenced_ids="text_preparation_label,text_preparation" />
+
+                <TextView
+                    android:id="@+id/text_preparation_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/preparation"
+                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                    android:textColor="@color/primary" />
+
+                <TextView
+                    android:id="@+id/text_preparation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textColor="@color/text_primary"
+                    android:lineSpacingExtra="4dp"
+                    tools:text="1. Poner las alubias en remojo..." />
+
+                <!-- Trucos y consejos -->
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/group_tips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:constraint_referenced_ids="text_tips_label,text_tips,separator_tips" />
+
+                <View
+                    android:id="@+id/separator_tips"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/divider" />
+
+                <TextView
+                    android:id="@+id/text_tips_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tips"
+                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                    android:textColor="@color/accent" />
+
+                <TextView
+                    android:id="@+id/text_tips"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textColor="@color/text_primary"
+                    android:lineSpacingExtra="4dp" />
+
+                <!-- Notas -->
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/group_notes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:constraint_referenced_ids="text_notes_label,text_notes,separator_notes" />
+
+                <View
+                    android:id="@+id/separator_notes"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/divider" />
+
+                <TextView
+                    android:id="@+id/text_notes_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/notes"
+                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                    android:textColor="@color/accent" />
+
+                <TextView
+                    android:id="@+id/text_notes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:textColor="@color/text_primary"
+                    android:lineSpacingExtra="4dp" />
+
+                <!-- Botón ver restaurante -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_restaurant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="80dp"
+                    android:text="@string/view_restaurant"
+                    android:visibility="gone"
+                    app:icon="@drawable/ic_restaurant"
+                    style="@style/Widget.Material3.Button.OutlinedButton" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- FAB para favoritos -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/add_favorite"
+        app:srcCompat="@drawable/ic_favorite_outline"
+        app:tint="@color/favorite" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

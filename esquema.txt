@@ -1,0 +1,29 @@
+es.uniovi.recetasasturianas/
+├── data/
+│   ├── local/
+│   │   ├── RecipeDatabase.kt        ← Room BD 1 (caché)
+│   │   ├── FavoritesDatabase.kt     ← Room BD 2 (favoritos)
+│   │   ├── RecipeDao.kt
+│   │   └── FavoriteDao.kt
+│   ├── remote/
+│   │   ├── RecipeApiService.kt      ← Retrofit
+│   │   └── RetrofitClient.kt
+│   ├── model/
+│   │   ├── Recipe.kt                ← Entidad Room + modelo
+│   │   └── Favorite.kt
+│   └── repository/
+│       └── RecipeRepository.kt      ← Fuente única de datos
+├── ui/
+│   ├── list/
+│   │   ├── RecipeListFragment.kt
+│   │   ├── RecipeListViewModel.kt
+│   │   └── RecipeAdapter.kt
+│   ├── detail/
+│   │   ├── RecipeDetailFragment.kt
+│   │   └── RecipeDetailViewModel.kt
+│   ├── favorites/
+│   │   ├── FavoritesFragment.kt
+│   │   └── FavoritesViewModel.kt
+│   └── settings/
+│       └── SettingsFragment.kt
+└── MainActivity.kt

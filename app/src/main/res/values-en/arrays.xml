@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Refresh intervals -->
+    <string-array name="refresh_hours_entries">
+        <item>1 hour</item>
+        <item>6 hours</item>
+        <item>12 hours</item>
+        <item>24 hours</item>
+        <item>48 hours</item>
+        <item>1 week</item>
+    </string-array>
+
+    <string-array name="refresh_hours_values">
+        <item>1</item>
+        <item>6</item>
+        <item>12</item>
+        <item>24</item>
+        <item>48</item>
+        <item>168</item>
+    </string-array>
+
+    <!-- Sort options -->
+    <string-array name="sort_entries">
+        <item>By name</item>
+        <item>By restaurant</item>
+        <item>By time</item>
+    </string-array>
+
+    <string-array name="sort_values">
+        <item>name</item>
+        <item>restaurant</item>
+        <item>time</item>
+    </string-array>
+    
+    <!-- Share options -->
+    <string-array name="share_options">
+        <item>Full text</item>
+        <item>Link only</item>
+    </string-array>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Placeholder para imágenes de recetas -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/divider" />
+    <item
+        android:drawable="@drawable/ic_recipes"
+        android:width="64dp"
+        android:height="64dp"
+        android:gravity="center" />
+</layer-list>

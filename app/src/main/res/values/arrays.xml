@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Intervalos de actualización -->
+    <string-array name="refresh_hours_entries">
+        <item>1 hora</item>
+        <item>6 horas</item>
+        <item>12 horas</item>
+        <item>24 horas</item>
+        <item>48 horas</item>
+        <item>1 semana</item>
+    </string-array>
+
+    <string-array name="refresh_hours_values">
+        <item>1</item>
+        <item>6</item>
+        <item>12</item>
+        <item>24</item>
+        <item>48</item>
+        <item>168</item>
+    </string-array>
+
+    <!-- Opciones de ordenación -->
+    <string-array name="sort_entries">
+        <item>Por nombre</item>
+        <item>Por restaurante</item>
+        <item>Por tiempo</item>
+    </string-array>
+
+    <string-array name="sort_values">
+        <item>name</item>
+        <item>restaurant</item>
+        <item>time</item>
+    </string-array>
+
+    <!-- Temas -->
+    <string-array name="theme_entries">
+        <item>@string/theme_light</item>
+        <item>@string/theme_dark</item>
+        <item>@string/theme_system</item>
+    </string-array>
+
+    <string-array name="theme_values">
+        <item>light</item>
+        <item>dark</item>
+        <item>system</item>
+    </string-array>
+    
+    <!-- Opciones de compartir -->
+    <string-array name="share_options">
+        <item>Texto completo</item>
+        <item>Solo enlace</item>
+    </string-array>
+</resources>

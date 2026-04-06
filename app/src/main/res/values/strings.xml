@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Recetas Asturianas</string>
+
+    <!-- Navegación -->
+    <string name="nav_recipes">Recetas</string>
+    <string name="nav_favorites">Favoritos</string>
+    <string name="nav_settings">Ajustes</string>
+
+    <!-- Lista de recetas -->
+    <string name="search_hint">Buscar receta o restaurante…</string>
+    <string name="filter_all">Todas</string>
+    <string name="filter_quick">Rápidas (≤30 min)</string>
+    <string name="filter_medium">Medias (31–60 min)</string>
+    <string name="filter_long">Largas (>60 min)</string>
+    <string name="sort_name">Por nombre</string>
+    <string name="sort_restaurant">Por restaurante</string>
+    <string name="no_recipes">No hay recetas disponibles</string>
+    <string name="no_results">No se encontraron resultados</string>
+    <string name="loading">Cargando recetas…</string>
+    <string name="error_loading">Error al cargar las recetas</string>
+    <string name="retry">Reintentar</string>
+
+    <!-- Detalle de receta -->
+    <string name="ingredients">Ingredientes</string>
+    <string name="preparation">Preparación</string>
+    <string name="time">Tiempo</string>
+    <string name="minutes">minutos</string>
+    <string name="time_format">%1$d minutos</string>
+    <string name="by_restaurant">Por %1$s</string>
+    <string name="view_restaurant">Ver restaurante</string>
+    <string name="tips">Trucos y consejos</string>
+    <string name="notes">Notas</string>
+
+    <!-- Favoritos -->
+    <string name="no_favorites">No tienes recetas favoritas</string>
+    <string name="no_favorites_hint">Marca recetas con el corazón para guardarlas aquí</string>
+    <string name="add_favorite">Añadir a favoritos</string>
+    <string name="remove_favorite">Quitar de favoritos</string>
+    <string name="favorite_added">Añadido a favoritos</string>
+    <string name="favorite_removed">Quitado de favoritos</string>
+
+    <!-- Ajustes -->
+    <string name="settings_title">Ajustes</string>
+    <string name="pref_theme_title">Tema de la aplicación</string>
+    <string name="pref_theme_summary">Cambiar entre tema claro, oscuro o del sistema</string>
+    <string name="pref_refresh_title">Intervalo de actualización</string>
+    <string name="pref_refresh_summary">Cada cuántas horas refrescar las recetas</string>
+    <string name="pref_sort_title">Orden por defecto</string>
+    <string name="pref_sort_summary">Cómo ordenar las recetas al abrir la app</string>
+    <string name="pref_hide_no_time_title">Ocultar sin tiempo</string>
+    <string name="pref_hide_no_time_summary">No mostrar recetas sin tiempo de preparación</string>
+
+    <string name="theme_light">Claro</string>
+    <string name="theme_dark">Oscuro</string>
+    <string name="theme_system">Sistema (predeterminado)</string>
+
+    <!-- WebView -->
+    <string name="webview_error">No se pudo cargar la página</string>
+    <string name="back">Atrás</string>
+
+    <!-- Errores -->
+    <string name="error_network">Sin conexión a internet</string>
+    <string name="error_unknown">Ha ocurrido un error</string>
+
+    <!-- Tablet -->
+    <string name="select_recipe">Selecciona una receta para ver el detalle</string>
+
+    <!-- Compartir -->
+    <string name="share_recipe">Compartir receta</string>
+    <string name="share_as_text">Compartir como texto</string>
+    <string name="sort_time">Por tiempo</string>
+
+    <!-- Offline -->
+    <string name="offline_mode">Modo sin conexión - mostrando datos en caché</string>
+</resources>

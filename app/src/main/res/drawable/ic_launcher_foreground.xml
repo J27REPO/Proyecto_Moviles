@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Fondo circular -->
+    <path
+        android:fillColor="#1B5E20"
+        android:pathData="M54,54m-40,0a40,40 0,1 1,80 0a40,40 0,1 1,-80 0"/>
+    <!-- Cuchara y tenedor -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M42,28v16c0,3.31 2.69,6 6,6v22h6V50c3.31,0 6,-2.69 6,-6V28h-2v12h-4V28h-2v12h-4V28h-2v12h-4V28H42zM66,28v12v12c0,3.31 -2.69,6 -6,6v22h-2V58c-2.21,0 -4,-1.79 -4,-4V28c0,-2.21 1.79,-4 4,-4h8V28z"/>
+</vector>

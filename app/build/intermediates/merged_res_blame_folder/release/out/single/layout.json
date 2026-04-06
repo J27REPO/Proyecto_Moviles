@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "es.uniovi.recetasasturianas.app-mergeReleaseResources-57:/layout/item_recipe.xml",
+        "source": "es.uniovi.recetasasturianas.app-main-59:/layout/item_recipe.xml"
+    },
+    {
+        "merged": "es.uniovi.recetasasturianas.app-mergeReleaseResources-57:/layout/activity_main.xml",
+        "source": "es.uniovi.recetasasturianas.app-main-59:/layout/activity_main.xml"
+    },
+    {
+        "merged": "es.uniovi.recetasasturianas.app-mergeReleaseResources-57:/layout/fragment_favorites.xml",
+        "source": "es.uniovi.recetasasturianas.app-main-59:/layout/fragment_favorites.xml"
+    },
+    {
+        "merged": "es.uniovi.recetasasturianas.app-mergeReleaseResources-57:/layout/fragment_recipe_detail.xml",
+        "source": "es.uniovi.recetasasturianas.app-main-59:/layout/fragment_recipe_detail.xml"
+    },
+    {
+        "merged": "es.uniovi.recetasasturianas.app-mergeReleaseResources-57:/layout/fragment_web_view.xml",
+        "source": "es.uniovi.recetasasturianas.app-main-59:/layout/fragment_web_view.xml"
+    },
+    {
+        "merged": "es.uniovi.recetasasturianas.app-mergeReleaseResources-57:/layout/fragment_recipe_list.xml",
+        "source": "es.uniovi.recetasasturianas.app-main-59:/layout/fragment_recipe_list.xml"
+    }
+]

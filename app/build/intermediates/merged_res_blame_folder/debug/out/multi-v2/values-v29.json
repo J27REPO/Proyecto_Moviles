@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "es.uniovi.recetasasturianas.app-mergeDebugResources-56:/values-v29/values-v29.xml",
+            "map": [
+                {
+                    "source": "/home/j27/.gradle/caches/transforms-3/30649bf71acfb726acbb073ee7cdacb6/transformed/core-splashscreen-1.0.1/res/values-v29/values-v29.xml",
+                    "from": {
+                        "startLines": "2,7",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,374",
+                        "endLines": "6,8",
+                        "endColumns": "12,12",
+                        "endOffsets": "369,464"
+                    }
+                }
+            ]
+        }
+    ]
+}
