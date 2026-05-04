@@ -30,6 +30,19 @@ class RecipeAdapter(
 
     // ID de receta seleccionada (para tablets)
     private var selectedRecipeId: Int? = null
+    
+    // Filtros aplicados a nivel UI (ViewHolder)
+    var currentTimeFilter: TimeFilter = TimeFilter.ALL
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+        
+    var hideNoTime: Boolean = false
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     /**
      * Establece el ID de la receta seleccionada (para tablets).
@@ -60,7 +73,7 @@ class RecipeAdapter(
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
         val recipe = getItem(position)
-        holder.bind(recipe, recipe.id == selectedRecipeId)
+        holder.bind(recipe, recipe.id == selectedRecipeId, currentTimeFilter, hideNoTime)
     }
 
     class RecipeViewHolder(
@@ -68,7 +81,31 @@ class RecipeAdapter(
         private val onRecipeClick: (Recipe) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(recipe: Recipe, isSelected: Boolean) {
+        fun bind(recipe: Recipe, isSelected: Boolean, filter: TimeFilter, hideNoTime: Boolean) {
+            val matchesTimeFilter = when (filter) {
+                TimeFilter.ALL -> true
+                TimeFilter.QUICK -> recipe.timeMinutes != null && recipe.timeMinutes <= 30
+                TimeFilter.MEDIUM -> recipe.timeMinutes != null && recipe.timeMinutes in 31..60
+                TimeFilter.LONG -> recipe.timeMinutes != null && recipe.timeMinutes > 60
+            }
+            val matchesHideNoTime = if (hideNoTime) recipe.timeMinutes != null else true
+
+            if (!matchesTimeFilter || !matchesHideNoTime) {
+                binding.root.visibility = View.GONE
+                binding.root.layoutParams = RecyclerView.LayoutParams(0, 0)
+                return
+            } else {
+                binding.root.visibility = View.VISIBLE
+                val params = RecyclerView.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+                // Usamos un margen fijo de 8dp como aproximación estándar
+                val margin = (8 * binding.root.context.resources.displayMetrics.density).toInt()
+                params.setMargins(margin, margin, margin, margin)
+                binding.root.layoutParams = params
+            }
+
             binding.apply {
                 // Nombre de la receta
                 textRecipeName.text = recipe.name

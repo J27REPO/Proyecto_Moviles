@@ -111,6 +111,7 @@ class RecipeListFragment : Fragment() {
                 else -> TimeFilter.ALL
             }
             viewModel.applyTimeFilter(filter)
+            adapter.currentTimeFilter = filter
         }
     }
 
@@ -121,6 +122,7 @@ class RecipeListFragment : Fragment() {
         }
 
         viewModel.timeFilter.observe(viewLifecycleOwner) { filter ->
+            adapter.currentTimeFilter = filter
             val chipId = when (filter) {
                 TimeFilter.ALL -> View.NO_ID // Ninguno marcado si es ALL
                 TimeFilter.QUICK -> R.id.chip_quick
@@ -188,6 +190,8 @@ class RecipeListFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         // Refrescar preferencias cuando se vuelve a este fragment
+        val prefs = androidx.preference.PreferenceManager.getDefaultSharedPreferences(requireContext())
+        adapter.hideNoTime = prefs.getBoolean("hide_no_time", false)
         viewModel.refreshPreferences()
     }
 

@@ -50,42 +50,28 @@ class RecipeListViewModel(application: Application) : AndroidViewModel(applicati
 
     // Recetas observadas (cambian según búsqueda y preferencias)
     val recipes: LiveData<List<Recipe>> = _searchQuery.switchMap { query ->
-        _timeFilter.switchMap { filter ->
-            android.util.Log.d("RecipeListViewModel", "SwitchMap disparado con query: '$query' y filtro: $filter")
-            val hideNoTime = prefs.getBoolean("hide_no_time", false)
-            val sortBy = prefs.getString("default_sort", "name") ?: "name"
+        android.util.Log.d("RecipeListViewModel", "SwitchMap disparado con query: '$query'")
+        val sortBy = prefs.getString("default_sort", "name") ?: "name"
 
-            val source = if (query.isNullOrBlank()) {
-                // Aplicar ordenación inicial según preferencia
-                when (sortBy) {
-                    "restaurant" -> repository.getAllRecipesByRestaurant()
-                    else -> repository.getAllRecipes()
-                }
-            } else {
-                repository.searchRecipes(query)
+        val source = if (query.isNullOrBlank()) {
+            // Aplicar ordenación inicial según preferencia
+            when (sortBy) {
+                "restaurant" -> repository.getAllRecipesByRestaurant()
+                else -> repository.getAllRecipes()
             }
+        } else {
+            repository.searchRecipes(query)
+        }
 
-            // Aplicar filtros y ordenación final
-            source.map { list ->
-                android.util.Log.d("RecipeListViewModel", "Dataset recibido: ${list.size} recetas")
-                
-                // 1. Filtro 'Ocultar sin tiempo' (Settings)
-                var filtered = if (hideNoTime) list.filter { it.timeMinutes != null } else list
-                
-                // 2. Filtro de tiempo (UI Chips)
-                filtered = when (filter) {
-                    TimeFilter.ALL -> filtered
-                    TimeFilter.QUICK -> filtered.filter { it.timeMinutes != null && it.timeMinutes <= 30 }
-                    TimeFilter.MEDIUM -> filtered.filter { it.timeMinutes != null && it.timeMinutes in 31..60 }
-                    TimeFilter.LONG -> filtered.filter { it.timeMinutes != null && it.timeMinutes > 60 }
-                }
-
-                // 3. Ordenación final según preferencia
-                when (sortBy) {
-                    "restaurant" -> filtered.sortedBy { it.restaurant.lowercase() }
-                    "time" -> filtered.sortedBy { it.timeMinutes ?: Int.MAX_VALUE }
-                    else -> filtered.sortedBy { it.name.lowercase() }
-                }
+        // Aplicar ordenación final sin modificar (filtrar) el dataset
+        source.map { list ->
+            android.util.Log.d("RecipeListViewModel", "Dataset recibido: ${list.size} recetas")
+            
+            // 3. Ordenación final según preferencia
+            when (sortBy) {
+                "restaurant" -> list.sortedBy { it.restaurant.lowercase() }
+                "time" -> list.sortedBy { it.timeMinutes ?: Int.MAX_VALUE }
+                else -> list.sortedBy { it.name.lowercase() }
             }
         }
     }
