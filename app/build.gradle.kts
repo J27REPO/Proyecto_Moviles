@@ -8,11 +8,11 @@ plugins {
 
 android {
     namespace = "es.uniovi.recetasasturianas"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "es.uniovi.recetasasturianas"
-        minSdk = 21
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -47,9 +47,10 @@ dependencies {
     implementation("androidx.room:room-ktx:2.6.1")
     ksp("androidx.room:room-compiler:2.6.1")
 
-    // Retrofit + Gson
+    // Retrofit + Moshi
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation("com.squareup.moshi:moshi-kotlin:1.15.1")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
     // Glide (imágenes)
@@ -84,12 +85,15 @@ dependencies {
     // SwipeRefreshLayout
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
-    // UI Tests (Espresso)
+    // UI Tests (Barista + Espresso)
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test:runner:1.5.2")
     androidTestImplementation("androidx.test:rules:1.5.0")
+    androidTestImplementation("com.adevinta.android:barista:4.3.0") {
+        exclude(group = "org.jetbrains.kotlin")
+    }
 
     // Unit tests
     testImplementation("junit:junit:4.13.2")

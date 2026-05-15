@@ -5,18 +5,18 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.preference.PreferenceManager
-import com.google.gson.Gson
+import com.squareup.moshi.Moshi
 import es.uniovi.recetasasturianas.data.local.FavoriteDao
 import es.uniovi.recetasasturianas.data.local.RecipeDao
 import es.uniovi.recetasasturianas.data.local.RecipeDatabase
 import es.uniovi.recetasasturianas.data.model.Favorite
 import es.uniovi.recetasasturianas.data.model.Recipe
 import es.uniovi.recetasasturianas.data.remote.RetrofitClient
+import es.uniovi.recetasasturianas.data.remote.dto.FlexibleAdapterFactory
 import es.uniovi.recetasasturianas.data.remote.dto.RecipeResponse
 import es.uniovi.recetasasturianas.data.remote.dto.toEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.io.InputStreamReader
 
 /**
  * Repositorio que actúa como fuente única de datos.
@@ -34,7 +34,10 @@ class RecipeRepository(private val context: Context) {
     private val favoriteDao: FavoriteDao = database.favoriteDao()
     private val apiService = RetrofitClient.recipeApiService
     private val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-    private val gson = Gson()
+    private val moshi = Moshi.Builder()
+        .add(FlexibleAdapterFactory())
+        .add(com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory())
+        .build()
 
     // Flag para evitar múltiples refrescos simultáneos
     @Volatile
@@ -169,13 +172,12 @@ class RecipeRepository(private val context: Context) {
      */
     private fun loadFromAssets(cachedAt: Long): List<Recipe> {
         return try {
-            val inputStream = context.assets.open("recetas.json")
-            val reader = InputStreamReader(inputStream)
-            val response = gson.fromJson(reader, RecipeResponse::class.java)
-            reader.close()
-            inputStream.close()
+            val jsonText = context.assets.open("recetas.json")
+                .bufferedReader()
+                .use { it.readText() }
+            val response = moshi.adapter(RecipeResponse::class.java).fromJson(jsonText)
             
-            val articles = response.articles.article
+            val articles = response?.articles?.article ?: emptyList()
             Log.d("RecipeRepository", "Assets: ${articles.size} recetas cargadas")
             articles.mapIndexed { index, article ->
                 article.toEntity(index, cachedAt)

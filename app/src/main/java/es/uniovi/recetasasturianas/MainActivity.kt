@@ -103,6 +103,20 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
+    /**
+     * Oculta la toolbar principal (para fragments con toolbar propia, ej: WebView).
+     */
+    fun hideToolbar() {
+        binding.toolbar?.visibility = View.GONE
+    }
+
+    /**
+     * Muestra la toolbar principal.
+     */
+    fun showToolbar() {
+        binding.toolbar?.visibility = View.VISIBLE
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment

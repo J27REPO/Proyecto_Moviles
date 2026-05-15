@@ -124,19 +124,7 @@
     </style>
     <style name="Theme.RecetasAsturianas" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorPrimaryVariant">@color/primary_light</item>
-        <item name="colorSecondary">@color/secondary</item>
-        <item name="colorSecondaryVariant">@color/secondary_light</item>
-        <item name="colorAccent">@color/accent</item>
-        <item name="android:colorBackground">@color/background</item>
-        <item name="colorSurface">@color/surface</item>
-        <item name="colorError">@color/error</item>
         <item name="colorOnPrimary">@color/on_primary</item>
-        <item name="colorOnSecondary">@color/on_secondary</item>
-        <item name="colorOnBackground">@color/on_background</item>
-        <item name="colorOnSurface">@color/on_surface</item>
-        <item name="colorOnError">@color/on_error</item>
     </style>
     <style name="Theme.RecetasAsturianas.AppBarOverlay" parent="ThemeOverlay.Material3.Dark"/>
     <style name="Theme.RecetasAsturianas.NoActionBar">

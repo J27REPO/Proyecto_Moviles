@@ -114,7 +114,7 @@ class MappersTest {
         val json = """{"classPK":94845,"groupId":"39908","title":"foto.jpg","uuid":"a744d57d-73a3-09f5-bb64-837d690337a4"}"""
         val result = extractImageUrl(json, null)
         assertEquals(
-            "https://www.turismoasturias.es/documents/39908/a744d57d-73a3-09f5-bb64-837d690337a4/foto.jpg",
+            "https://www.turismoasturias.es/documents/39908/0/foto.jpg/a744d57d-73a3-09f5-bb64-837d690337a4?version=1.0",
             result
         )
     }
@@ -124,7 +124,7 @@ class MappersTest {
         val json = """{"image": {"classPK":94845,"groupId":"39908","title":"foto.jpg","uuid":"a744d57d-73a3-09f5-bb64-837d690337a4"}}"""
         val result = extractImageUrl(json, null)
         assertEquals(
-            "https://www.turismoasturias.es/documents/39908/a744d57d-73a3-09f5-bb64-837d690337a4/foto.jpg",
+            "https://www.turismoasturias.es/documents/39908/0/foto.jpg/a744d57d-73a3-09f5-bb64-837d690337a4?version=1.0",
             result
         )
     }
@@ -134,7 +134,7 @@ class MappersTest {
         val json = """{"groupId":"39908","title":"foto con espacios.jpg","uuid":"uuid-123"}"""
         val result = extractImageUrl(json, null)
         assertEquals(
-            "https://www.turismoasturias.es/documents/39908/uuid-123/foto%20con%20espacios.jpg",
+            "https://www.turismoasturias.es/documents/39908/0/foto%20con%20espacios.jpg/uuid-123?version=1.0",
             result
         )
     }

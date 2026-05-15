@@ -1,0 +1,536 @@
+# 2026-05-15T18:59:57.084Z:
+test_suite_meta_data {
+  scheduled_test_case_count: 10
+}
+test_status: PASSED
+test_result {
+  test_case {
+    test_class: "NavigationTest"
+    test_package: "es.uniovi.recetasasturianas"
+    test_method: "bottomNavigation_navigatesBetweenTabs"
+    start_time {
+      seconds: 1778871584
+      nanos: 754000000
+    }
+    end_time {
+      seconds: 1778871587
+      nanos: 157000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/logcat-es.uniovi.recetasasturianas.NavigationTest-bottomNavigation_navigatesBetweenTabs.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "NavigationTest"
+    test_package: "es.uniovi.recetasasturianas"
+    test_method: "appTitle_isDisplayed"
+    start_time {
+      seconds: 1778871587
+      nanos: 174000000
+    }
+    end_time {
+      seconds: 1778871587
+      nanos: 728000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/logcat-es.uniovi.recetasasturianas.NavigationTest-appTitle_isDisplayed.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "RecipeDetailFragmentTest"
+    test_package: "es.uniovi.recetasasturianas"
+    test_method: "toggleFavorite_updatesFabIcon"
+    start_time {
+      seconds: 1778871587
+      nanos: 729000000
+    }
+    end_time {
+      seconds: 1778871589
+      nanos: 187000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/logcat-es.uniovi.recetasasturianas.RecipeDetailFragmentTest-toggleFavorite_updatesFabIcon.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "RecipeDetailFragmentTest"
+    test_package: "es.uniovi.recetasasturianas"
+    test_method: "restaurantButton_existsIfHasUrl"
+    start_time {
+      seconds: 1778871589
+      nanos: 189000000
+    }
+    end_time {
+      seconds: 1778871590
+      nanos: 320000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/logcat-es.uniovi.recetasasturianas.RecipeDetailFragmentTest-restaurantButton_existsIfHasUrl.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "RecipeDetailFragmentTest"
+    test_package: "es.uniovi.recetasasturianas"
+    test_method: "displayRecipeDetails"
+    start_time {
+      seconds: 1778871590
+      nanos: 347000000
+    }
+    end_time {
+      seconds: 1778871591
+      nanos: 453000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/logcat-es.uniovi.recetasasturianas.RecipeDetailFragmentTest-displayRecipeDetails.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "RecipeListFragmentTest"
+    test_package: "es.uniovi.recetasasturianas"
+    test_method: "displayRecipeList"
+    start_time {
+      seconds: 1778871591
+      nanos: 455000000
+    }
+    end_time {
+      seconds: 1778871592
+      nanos: 8000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/logcat-es.uniovi.recetasasturianas.RecipeListFragmentTest-displayRecipeList.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "RecipeListFragmentTest"
+    test_package: "es.uniovi.recetasasturianas"
+    test_method: "searchRecipe_filtersList"
+    start_time {
+      seconds: 1778871592
+      nanos: 34000000
+    }
+    end_time {
+      seconds: 1778871592
+      nanos: 964000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/logcat-es.uniovi.recetasasturianas.RecipeListFragmentTest-searchRecipe_filtersList.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "RecipeListFragmentTest"
+    test_package: "es.uniovi.recetasasturianas"
+    test_method: "pullToRefresh_refreshesList"
+    start_time {
+      seconds: 1778871592
+      nanos: 991000000
+    }
+    end_time {
+      seconds: 1778871593
+      nanos: 997000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/logcat-es.uniovi.recetasasturianas.RecipeListFragmentTest-pullToRefresh_refreshesList.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "RecipeListFragmentTest"
+    test_package: "es.uniovi.recetasasturianas"
+    test_method: "clickRecipe_navigateToDetail"
+    start_time {
+      seconds: 1778871594
+      nanos: 24000000
+    }
+    end_time {
+      seconds: 1778871595
+      nanos: 205000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/logcat-es.uniovi.recetasasturianas.RecipeListFragmentTest-clickRecipe_navigateToDetail.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/cpuinfo"
+    }
+  }
+}
+test_result {
+  test_case {
+    test_class: "RecipeListFragmentTest"
+    test_package: "es.uniovi.recetasasturianas"
+    test_method: "filterByTime_filtersList"
+    start_time {
+      seconds: 1778871595
+      nanos: 207000000
+    }
+    end_time {
+      seconds: 1778871595
+      nanos: 987000000
+    }
+  }
+  test_status: PASSED
+  output_artifact {
+    label {
+      label: "logcat"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/logcat-es.uniovi.recetasasturianas.RecipeListFragmentTest-filterByTime_filtersList.txt"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/device-info.pb"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.meminfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/meminfo"
+    }
+  }
+  output_artifact {
+    label {
+      label: "device-info.cpuinfo"
+      namespace: "android"
+    }
+    source_path {
+      path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/cpuinfo"
+    }
+  }
+}
+output_artifact {
+  label {
+    label: "test-results.log"
+    namespace: "com.google.testing.platform.runtime.android.driver.AndroidInstrumentationDriver"
+  }
+  source_path {
+    path: "/home/j27/Documents/Proyecto_Moviles/app/build/outputs/androidTest-results/connected/debug/SM-G990B - 16/testlog/test-results.log"
+  }
+  type: TEST_DATA
+  mime_type: "text/plain"
+}

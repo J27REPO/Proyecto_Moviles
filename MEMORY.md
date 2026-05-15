@@ -1,196 +1,159 @@
-# Proyecto Recetas Asturianas - Estado Final
+# Proyecto Recetas Asturianas — Memoria Tecnica
 
-## Resumen de Implementación
+## Resumen
 
-La aplicación Android está **completa y mejorada** según los requisitos de la asignatura Informática Móvil.
-
----
-
-## ✅ Requisitos Implementados
-
-| Requisito | Estado | Detalle |
-|-----------|--------|---------|
-| Arquitectura MVVM | ✅ | ViewModels + LiveData + Repository |
-| Room (2 BDs) | ✅ | RecipeDatabase + FavoritesDatabase |
-| Retrofit + API | ✅ | Turismo Asturias Profesional |
-| Navigation Component | ✅ | nav_graph.xml con animaciones |
-| Búsqueda | ✅ | Por nombre, restaurante E ingredientes |
-| Filtrado | ✅ | Por tiempo (rápido/medio/largo) |
-| Favoritos | ✅ | Persistencia en Room + FAB toggle |
-| Preferencias | ✅ | SettingsFragment con PreferenceFragmentCompat |
-| WebView embebido | ✅ | RestaurantWebViewFragment |
-| Bilingüe | ✅ | Español + Inglés |
-| Tablet (sw600dp) | ✅ | Layout maestro-detalle |
-| Espresso Tests | ✅ | Tests UI mejorados |
-| Unit Tests | ✅ | MappersTest.kt |
+Aplicacion Android para explorar, buscar y guardar recetas tipicas de la gastronomia asturiana. Los datos se obtienen del catalogo de datos abiertos del Principado de Asturias (conjunto "Recetas de cocina"), con sistema de fallback local y cache en Room. Arquitectura MVVM con Repository Pattern.
 
 ---
 
-## 🆕 Mejoras Adicionales
+## Arquitectura: MVVM + Repository
 
-| Mejora | Descripción |
-|--------|-------------|
-| **Ordenación por preferencia** | name/restaurant/time |
-| **Compartir receta** | Texto completo o solo enlace |
-| **Animaciones** | Transiciones slide entre fragments |
-| **Splash Screen** | Pantalla de bienvenida |
-| **Indicador offline** | Banner cuando no hay conexión |
-| **Búsqueda por ingredientes** | SQL LIKE en ingredientsHtml |
-| **Empty states mejorados** | Iconos y mensajes guía |
-| **Detección de red** | NetworkUtils.kt |
+### Capas
 
----
+1. **UI Layer** — Fragments + ViewModels + LiveData
+   - Los Fragments observan `LiveData` expuestos por los ViewModels
+   - Los ViewModels sobreviven a cambios de configuracion (rotacion)
+   - ViewBinding para acceso type-safe a vistas
 
-## 📁 Estructura de Archivos
+2. **Domain Layer** — RecipeRepository (singleton)
+   - Fuente unica de datos (Single Source of Truth)
+   - Decide si ir a red, cache o assets
+   - Control de intervalo de refresco via SharedPreferences
+
+3. **Data Layer** — Room (local) + Retrofit (remoto) + Assets (fallback)
+   - Room 2.6.1 con 2 tablas: `recipes` y `favorites`
+   - Retrofit 2.9.0 + Moshi 1.15.1 para API REST
+   - Moshi + FlexibleAdapterFactory para JSON inconsistente
+   - OkHttp 4.12.0 con logging interceptor y timeouts 30s
+
+### Flujo de datos tipico
 
 ```
-app/src/main/java/es/uniovi/recetasasturianas/
-├── data/
-│   ├── local/
-│   │   ├── RecipeDao.kt          ← Búsqueda por ingredientes
-│   │   ├── RecipeDatabase.kt
-│   │   ├── FavoriteDao.kt
-│   │   └── FavoritesDatabase.kt
-│   ├── remote/
-│   │   ├── RecipeApiService.kt
-│   │   ├── RetrofitClient.kt
-│   │   └── dto/
-│   │       ├── RecipeResponse.kt
-│   │       └── Mappers.kt        ← Parseo tiempo, URLs
-│   ├── model/
-│   │   ├── Recipe.kt
-│   │   └── Favorite.kt
-│   └── repository/
-│       └── RecipeRepository.kt   ← Lógica offline
-├── ui/
-│   ├── list/
-│   │   ├── RecipeListFragment.kt ← Banner offline
-│   │   ├── RecipeListViewModel.kt ← Ordenación
-│   │   └── RecipeAdapter.kt      ← Selección tablet
-│   ├── detail/
-│   │   ├── RecipeDetailFragment.kt ← Compartir
-│   │   └── RecipeDetailViewModel.kt
-│   ├── favorites/
-│   │   ├── FavoritesFragment.kt
-│   │   └── FavoritesViewModel.kt
-│   ├── settings/
-│   │   └── SettingsFragment.kt
-│   └── webview/
-│       └── RestaurantWebViewFragment.kt
-├── util/
-│   └── NetworkUtils.kt           ← Detección conectividad
-├── MainActivity.kt               ← Lógica tablet
-├── SplashActivity.kt             ← SplashScreen
-└── App.kt
+Fragment -> ViewModel.loadRecipes()
+  -> Repository.refreshRecipesIfNeeded()
+    -> [API disponible] Retrofit.getRecipes() -> Moshi parse -> Room save
+    -> [API falla]     assets/recetas.json -> Moshi parse -> Room save
+  -> Repository.getAllRecipes() -> LiveData<List<Recipe>>
+  -> Fragment observa y renderiza RecyclerView
+```
 
-app/src/test/java/
-└── data/remote/dto/
-    └── MappersTest.kt            ← Unit tests
+### Diferenciacion Busqueda vs Filtrado (concepto clave del enunciado)
 
-app/src/androidTest/java/
-├── RecipeListFragmentTest.kt
-├── RecipeDetailFragmentTest.kt
-├── NavigationTest.kt
-└── util/
-    └── DataLoadingIdlingResource.kt
+- **Busqueda** (capa de datos): `RecipeDao.search(query)` con SQL `LIKE` sobre `name`, `restaurant`, `ingredientsHtml`. Cambia el dataset subyacente que recibe el ViewModel.
+- **Filtrado** (capa UI): `RecipeAdapter.applyFilter()` + `TimeFilter` enum (ALL/QUICK/MEDIUM/LONG). Muestra u oculta elementos del dataset actual SIN modificarlo. Opera exclusivamente en el Adapter.
+
+---
+
+## Librerias y justificacion
+
+| Libreria | Version | Proposito | Por que esta (no otra) |
+|----------|---------|-----------|------------------------|
+| Kotlin | 1.9.22 | Lenguaje | Oficial Android, null safety, corrutinas |
+| Room | 2.6.1 | BD local | Cache offline, consultas SQL, LiveData reactivo |
+| Retrofit | 2.9.0 | Cliente HTTP | Estandar Android, type-safe, integra Moshi |
+| Moshi | 1.15.1 | JSON parsing | Requisito profesor, mejor que Gson para Kotlin |
+| OkHttp | 4.12.0 | HTTP client | Logging, timeouts, manejo errores red |
+| Glide | 4.16.0 | Imagenes | Placeholder, crossfade, cache disco/memoria |
+| Nav. Comp. | 2.7.7 | Navegacion | SafeArgs, animaciones, BottomNavigation integrado |
+| Material 3 | 1.11.0 | Diseno | Material You, Chips, FAB, BottomNavigation |
+| Barista | 4.3.0 | UI tests | API legible sobre Espresso, scroll automatico |
+| Espresso | 3.5.1 | UI tests | Framework base de testing UI Android |
+
+---
+
+## Modelo de Datos
+
+### Recipe (Entity Room + Parcelable)
+```kotlin
+@Entity(tableName = "recipes")
+data class Recipe(
+    @PrimaryKey val id: Int,
+    val name: String,
+    val restaurant: String,
+    val preparationHtml: String,
+    val ingredientsHtml: String,
+    val imageUrl: String?,
+    val restaurantUrl: String?,
+    val timeMinutes: Int?,
+    val tipsHtml: String?,
+    val notesHtml: String?,
+    val cachedAt: Long
+)
+```
+
+### Favorite (Entity Room)
+```kotlin
+@Entity(tableName = "favorites")
+data class Favorite(
+    @PrimaryKey val recipeId: Int,
+    val savedAt: Long = System.currentTimeMillis()
+)
 ```
 
 ---
 
-## 🎨 Recursos
+## Parseos destacados
 
-### Animaciones
-- `slide_in_right.xml`, `slide_out_left.xml`
-- `slide_in_left.xml`, `slide_out_right.xml`
-- `fade_in.xml`, `fade_out.xml`
+### Tiempo de preparacion
+Campo texto libre: "20 minutos", "3 horas", "1 hora 30 minutos", "45"
+```kotlin
+val hours = Regex("""(\d+)\s*hora?s?""").find(raw)
+val minutes = Regex("""(\d+)\s*minuto?s?""").find(raw)
+// Si no hay match, intenta extraer el primer numero
+```
 
-### Drawables
-- `ic_share.xml` - Compartir
-- `ic_offline.xml` - Modo sin conexión
-- `ic_empty_favorites.xml` - Empty state
-- `ic_splash.xml` - Splash screen
+### URL de imagen
+JSON anidado en campo `Imagen.content`:
+```json
+{"groupId":"39908","title":"foto.jpg","uuid":"a744d57d-..."}
+```
+Resultado: `https://www.turismoasturias.es/documents/39908/0/foto.jpg/uuid?version=1.0`
 
-### Layouts
-- `activity_main.xml` - Teléfono
-- `layout-sw600dp/activity_main.xml` - Tablet
-- `fragment_recipe_list.xml` - Con banner offline
-- `fragment_favorites.xml` - Empty state mejorado
-- `menu_detail.xml` - Opciones compartir
-
----
-
-## 🔧 Preferencias de Usuario
-
-| Clave | Tipo | Valores | Default |
-|-------|------|---------|---------|
-| `refresh_hours` | String | 1, 6, 12, 24, 48, 168 | 24 |
-| `default_sort` | String | name, restaurant, time | name |
-| `hide_no_time` | Boolean | true/false | false |
+### URL de restaurante
+HTML en campo `Informacion.Donde.content`:
+```html
+<a href="/ruta/restaurante/casa-fermin">Casa Fermin</a>
+```
+Resultado: `https://www.turismoasturias.es/ruta/restaurante/casa-fermin`
 
 ---
 
-## 📱 Para Compilar
+## Tests
+
+### Unit Tests (MappersTest.kt) — 20 tests, todos pasan
+- `extractRestaurantName()`: Con/sin prefijo "Por", null, vacio
+- `parseTimeToMinutes()`: Solo minutos, solo horas, combinados, null, vacio, numero solo
+- `extractRestaurantUrl()`: URL relativa, absoluta, null, sin href
+- `extractImageUrl()`: JSON valido, anidado (image field), espacios en title, invalido, null, con slide
+
+### UI Tests (Barista + Espresso) — 10 tests, todos pasan en SM-G990B
+- `NavigationTest.kt` (2): navegacion BottomNavigation, titulo toolbar
+- `RecipeListFragmentTest.kt` (5): carga lista, click receta, busqueda, filtro tiempo, pull-to-refresh
+- `RecipeDetailFragmentTest.kt` (3): datos detalle, toggle favorito, boton restaurante
+
+---
+
+## Decisiones de diseno
+
+1. **BottomNavigation** (no Drawer): 3-5 destinos, patron recomendado Material Design
+2. **Room 2 tablas separadas**: recipes + favorites con FK explicita
+3. **Moshi FlexibleAdapterFactory**: maneja JSON inconsistente (objeto vs array)
+4. **WebViewClient personalizado**: requisito profesor por falta de datos GPS
+5. **Handler.post() en Settings**: evita crash por recreacion de Activity dentro de callback
+6. **ViewBinding** (no DataBinding): mas ligero, solo binding type-safe
+
+---
+
+## Comandos
 
 ```bash
-# Debug APK
-./gradlew assembleDebug
-
-# Tests unitarios
-./gradlew test
-
-# Tests UI (requiere dispositivo/emulador)
-./gradlew connectedAndroidTest
+./gradlew assembleDebug              # Compilar APK
+./gradlew test                        # Tests unitarios (20)
+./gradlew connectedAndroidTest        # Tests UI (10, requiere dispositivo)
+./gradlew test connectedAndroidTest   # Todos los tests
+adb install -r app/build/outputs/apk/debug/app-debug.apk  # Instalar
 ```
 
 ---
 
-## 🌐 API
-
-- **Principal**: `https://www.turismoasturiasprofesional.es/open-data/turismoasturias`
-- **Alternativa**: `http://156.35.163.145/json/RecetasCocina.json` (VPN)
-
----
-
-## 📝 Notas Técnicas
-
-1. **Offline**: Muestra caché si no hay red, banner informativo
-2. **Parseo tiempo**: Soporta "X horas Y minutos", "X minutos", etc.
-3. **HTML**: Renderizado con HtmlCompat
-4. **Imágenes**: Glide con placeholder y crossfade
-5. **WebView**: No abre navegador externo (requisito)
-6. **Tablet**: Detalle en panel derecho, selección visual
-7. **Compartir**: Texto formateado con emojis
-
----
-
-## 🧪 Tests
-
-### Unit Tests (MappersTest.kt)
-- `extractRestaurantName()` - Con/sin prefijo "Por"
-- `parseTimeToMinutes()` - Horas, minutos, combinados
-- `extractRestaurantUrl()` - URLs relativas/absolutas
-- `extractImageUrl()` - JSON parse, errores
-
-### UI Tests (Espresso)
-- Carga de lista
-- Navegación al detalle
-- Búsqueda
-- Filtrado por tiempo
-- Pull-to-refresh
-- Navegación entre tabs
-- Toggle favoritos
-
----
-
-## ✅ Verificación de Requisitos del Profesor
-
-| Requisito | ✅ |
-|-----------|---|
-| Mostrar información resumen | ✅ Cards con imagen, nombre, tiempo |
-| Mostrar información detalle | ✅ Ingredientes, preparación, trucos |
-| Integrar imágenes | ✅ Glide + URL construida |
-| WebView embebido | ✅ RestaurantWebViewFragment |
-| Búsquedas (receta, autor, ingredientes) | ✅ Room SQL LIKE |
-| Filtrado por característica | ✅ Tiempo (chips) |
-| Guardar favoritos | ✅ Room + FAB toggle |
-| Recordar preferencias | ✅ SharedPreferences |
+*Ultima actualizacion: 15 de mayo de 2026*

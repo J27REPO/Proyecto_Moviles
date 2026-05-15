@@ -1,56 +1,56 @@
 package es.uniovi.recetasasturianas.data.remote.dto
 
-import com.google.gson.*
-import com.google.gson.annotations.JsonAdapter
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.JsonClass
+import com.squareup.moshi.JsonReader
+import com.squareup.moshi.JsonWriter
+import com.squareup.moshi.Moshi
 import java.lang.reflect.Type
+import java.lang.reflect.ParameterizedType
 
 /**
  * DTO para la respuesta JSON completa de la API.
  * Estructura: { "articles": { "article": [...] } }
  */
+@JsonClass(generateAdapter = true)
 data class RecipeResponse(
-    @SerializedName("articles")
+    @Json(name = "articles")
     val articles: ArticlesWrapper
 )
 
+@JsonClass(generateAdapter = true)
 data class ArticlesWrapper(
-    @SerializedName("article")
+    @Json(name = "article")
     val article: List<ArticleDto>
 )
 
 /**
  * DTO para cada artículo/receta del JSON.
- * Los campos tienen estructura anidada con "content" dentro.
- * Usamos @JsonAdapter para manejar inconsistencias (objeto vs array).
+ * Los campos "content" pueden venir como objeto o array.
+ * Usamos Moshi con adapters personalizados para manejar estas inconsistencias.
  */
+@JsonClass(generateAdapter = true)
 data class ArticleDto(
-    @SerializedName("Nombre")
-    @JsonAdapter(FlexibleContentDeserializer::class)
+    @Json(name = "Nombre")
     val nombre: ContentWrapper? = null,
 
-    @SerializedName("Resumen")
-    @JsonAdapter(FlexibleContentDeserializer::class)
+    @Json(name = "Resumen")
     val resumen: ContentWrapper? = null,
 
-    @SerializedName("Imagen")
-    @JsonAdapter(FlexibleContentDeserializer::class)
+    @Json(name = "Imagen")
     val imagen: ContentWrapper? = null,
 
-    @SerializedName("Visualizador")
-    @JsonAdapter(FlexibleVisualizadorDeserializer::class)
+    @Json(name = "Visualizador")
     val visualizador: VisualizadorWrapper? = null,
 
-    @SerializedName("Informacion")
-    @JsonAdapter(FlexibleInformacionDeserializer::class)
+    @Json(name = "Informacion")
     val informacion: InformacionWrapper? = null,
 
-    @SerializedName("Contacto")
-    @JsonAdapter(FlexibleContactoDeserializer::class)
+    @Json(name = "Contacto")
     val contacto: ContactoWrapper? = null,
 
-    @SerializedName("Observaciones")
-    @JsonAdapter(FlexibleObservacionesDeserializer::class)
+    @Json(name = "Observaciones")
     val observaciones: ObservacionesWrapper? = null
 )
 
@@ -58,143 +58,97 @@ data class ArticleDto(
  * Wrapper genérico para campos con "content".
  */
 data class ContentWrapper(
-    @SerializedName("content")
     val content: String? = null
 )
 
-/**
- * Función de ayuda para obtener el primer objeto de un JsonElement que puede ser objeto o array.
- */
-private fun JsonElement.getFirstObject(): JsonObject? {
-    return when {
-        this.isJsonObject -> this.asJsonObject
-        this.isJsonArray -> {
-            val array = this.asJsonArray
-            if (array.size() > 0 && array[0].isJsonObject) array[0].asJsonObject else null
-        }
-        else -> null
-    }
-}
-
-/**
- * Deserializador manual y flexible para ContentWrapper.
- */
-class FlexibleContentDeserializer : JsonDeserializer<ContentWrapper> {
-    override fun deserialize(json: JsonElement, typeOfT: Type, context: JsonDeserializationContext): ContentWrapper? {
-        val obj = json.getFirstObject() ?: return null
-        val contentElement = obj.get("content") ?: return null
-        
-        val content = when {
-            contentElement.isJsonPrimitive -> contentElement.asString
-            contentElement.isJsonObject -> contentElement.toString()
-            else -> null
-        }
-        
-        return ContentWrapper(content)
-    }
-}
-
+@JsonClass(generateAdapter = true)
 data class VisualizadorWrapper(
-    @SerializedName("Slide")
+    @Json(name = "Slide")
     val slide: SlideWrapper? = null
 )
 
-class FlexibleVisualizadorDeserializer : JsonDeserializer<VisualizadorWrapper> {
-    override fun deserialize(json: JsonElement, typeOfT: Type, context: JsonDeserializationContext): VisualizadorWrapper? {
-        val obj = json.getFirstObject() ?: return null
-        val slideElement = obj.get("Slide") ?: return null
-        val slideObj = slideElement.getFirstObject() ?: return VisualizadorWrapper(null)
-        
-        val value = slideObj.get("value")?.let { if (it.isJsonPrimitive) it.asString else null }
-        val slideUrlElement = slideObj.get("SlideUrl")?.getFirstObject()
-        val slideUrl = slideUrlElement?.get("content")?.let { if (it.isJsonPrimitive) it.asString else null }
-        
-        return VisualizadorWrapper(SlideWrapper(value, slideUrl))
-    }
-}
-
+@JsonClass(generateAdapter = true)
 data class SlideWrapper(
-    @SerializedName("value")
+    @Json(name = "value")
     val value: String? = null,
-    @SerializedName("SlideUrl")
-    val slideUrl: String? = null
+    @Json(name = "SlideUrl")
+    val slideUrl: ContentWrapper? = null
 )
 
+@JsonClass(generateAdapter = true)
 data class InformacionWrapper(
-    @SerializedName("Preparacion")
+    @Json(name = "Preparacion")
     val preparacion: ContentWrapper? = null,
 
-    @SerializedName("Donde")
+    @Json(name = "Donde")
     val donde: ContentWrapper? = null,
 
-    @SerializedName("JornadasGastronomicas")
+    @Json(name = "JornadasGastronomicas")
     val jornadasGastronomicas: ContentWrapper? = null
 )
 
-class FlexibleInformacionDeserializer : JsonDeserializer<InformacionWrapper> {
-    override fun deserialize(json: JsonElement, typeOfT: Type, context: JsonDeserializationContext): InformacionWrapper? {
-        val obj = json.getFirstObject() ?: return null
-        
-        fun parseContent(fieldName: String): ContentWrapper? {
-            return obj.get(fieldName)?.getFirstObject()?.let {
-                ContentWrapper(it.get("content")?.let { c -> if (c.isJsonPrimitive) c.asString else null })
-            }
-        }
-
-        return InformacionWrapper(
-            preparacion = parseContent("Preparacion"),
-            donde = parseContent("Donde"),
-            jornadasGastronomicas = parseContent("JornadasGastronomicas")
-        )
-    }
-}
-
+@JsonClass(generateAdapter = true)
 data class ContactoWrapper(
-    @SerializedName("Tiempo")
+    @Json(name = "Tiempo")
     val tiempo: ContentWrapper? = null,
 
-    @SerializedName("Ingredientes")
+    @Json(name = "Ingredientes")
     val ingredientes: ContentWrapper? = null
 )
 
-class FlexibleContactoDeserializer : JsonDeserializer<ContactoWrapper> {
-    override fun deserialize(json: JsonElement, typeOfT: Type, context: JsonDeserializationContext): ContactoWrapper? {
-        val obj = json.getFirstObject() ?: return null
-
-        fun parseContent(fieldName: String): ContentWrapper? {
-            return obj.get(fieldName)?.getFirstObject()?.let {
-                ContentWrapper(it.get("content")?.let { c -> if (c.isJsonPrimitive) c.asString else null })
-            }
-        }
-
-        return ContactoWrapper(
-            tiempo = parseContent("Tiempo"),
-            ingredientes = parseContent("Ingredientes")
-        )
-    }
-}
-
+@JsonClass(generateAdapter = true)
 data class ObservacionesWrapper(
-    @SerializedName("TrucosYConsejos")
+    @Json(name = "TrucosYConsejos")
     val trucosYConsejos: ContentWrapper? = null,
 
-    @SerializedName("Observacion")
+    @Json(name = "Observacion")
     val observacion: ContentWrapper? = null
 )
 
-class FlexibleObservacionesDeserializer : JsonDeserializer<ObservacionesWrapper> {
-    override fun deserialize(json: JsonElement, typeOfT: Type, context: JsonDeserializationContext): ObservacionesWrapper? {
-        val obj = json.getFirstObject() ?: return null
+/**
+ * Fábrica de adapters Moshi que maneja campos que pueden ser
+ * un objeto JSON o un array de objetos JSON (flexibilidad).
+ *
+ * Funciona extrayendo el primer elemento si el token es BEGIN_ARRAY
+ * y delegando la lectura real al adapter estándar de Moshi.
+ */
+class FlexibleAdapterFactory : JsonAdapter.Factory {
 
-        fun parseContent(fieldName: String): ContentWrapper? {
-            return obj.get(fieldName)?.getFirstObject()?.let {
-                ContentWrapper(it.get("content")?.let { c -> if (c.isJsonPrimitive) c.asString else null })
+    private val flexibleTypes = setOf(
+        ContentWrapper::class.java,
+        VisualizadorWrapper::class.java,
+        InformacionWrapper::class.java,
+        ContactoWrapper::class.java,
+        ObservacionesWrapper::class.java
+    )
+
+    override fun create(type: Type, annotations: MutableSet<out Annotation>, moshi: Moshi): JsonAdapter<*>? {
+        val rawType = if (type is ParameterizedType) type.rawType else type
+        if (rawType !in flexibleTypes) return null
+
+        val delegate = moshi.nextAdapter<Any>(this, type, annotations)
+
+        return object : JsonAdapter<Any>() {
+            override fun fromJson(reader: JsonReader): Any? {
+                return when (reader.peek()) {
+                    JsonReader.Token.BEGIN_OBJECT -> delegate.fromJson(reader)
+                    JsonReader.Token.BEGIN_ARRAY -> {
+                        reader.beginArray()
+                        val result = if (reader.hasNext()) delegate.fromJson(reader) else null
+                        while (reader.hasNext()) reader.skipValue()
+                        reader.endArray()
+                        result
+                    }
+                    else -> {
+                        reader.skipValue()
+                        null
+                    }
+                }
+            }
+
+            override fun toJson(writer: JsonWriter, value: Any?) {
+                delegate.toJson(writer, value)
             }
         }
-
-        return ObservacionesWrapper(
-            trucosYConsejos = parseContent("TrucosYConsejos"),
-            observacion = parseContent("Observacion")
-        )
     }
 }

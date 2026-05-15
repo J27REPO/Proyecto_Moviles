@@ -5,7 +5,7 @@
 5    android:versionName="1.0" >
 6
 7    <uses-sdk
-8        android:minSdkVersion="21"
+8        android:minSdkVersion="26"
 9        android:targetSdkVersion="35" />
 10
 11    <!-- Permisos de red -->
@@ -38,7 +38,7 @@
 25        android:dataExtractionRules="@xml/data_extraction_rules"
 25-->/home/j27/Documents/Proyecto_Moviles/app/src/main/AndroidManifest.xml:12:9-65
 26        android:debuggable="true"
-27        android:extractNativeLibs="true"
+27        android:extractNativeLibs="false"
 28        android:fullBackupContent="@xml/backup_rules"
 28-->/home/j27/Documents/Proyecto_Moviles/app/src/main/AndroidManifest.xml:13:9-54
 29        android:icon="@mipmap/ic_launcher"

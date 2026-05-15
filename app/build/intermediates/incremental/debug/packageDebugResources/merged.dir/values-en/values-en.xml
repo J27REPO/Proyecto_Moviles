@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="refresh_hours_entries">
+        <item>1 hour</item>
+        <item>6 hours</item>
+        <item>12 hours</item>
+        <item>24 hours</item>
+        <item>48 hours</item>
+        <item>1 week</item>
+    </string-array>
+    <string-array name="refresh_hours_values">
+        <item>1</item>
+        <item>6</item>
+        <item>12</item>
+        <item>24</item>
+        <item>48</item>
+        <item>168</item>
+    </string-array>
+    <string-array name="share_options">
+        <item>Full text</item>
+        <item>Link only</item>
+    </string-array>
+    <string-array name="sort_entries">
+        <item>By name</item>
+        <item>By restaurant</item>
+        <item>By time</item>
+    </string-array>
+    <string-array name="sort_values">
+        <item>name</item>
+        <item>restaurant</item>
+        <item>time</item>
+    </string-array>
+    <string name="add_favorite">Add to favorites</string>
+    <string name="app_name">Asturian Recipes</string>
+    <string name="back">Back</string>
+    <string name="by_restaurant">By %1$s</string>
+    <string name="error_loading">Error loading recipes</string>
+    <string name="error_network">No internet connection</string>
+    <string name="error_unknown">An error has occurred</string>
+    <string name="favorite_added">Added to favorites</string>
+    <string name="favorite_removed">Removed from favorites</string>
+    <string name="filter_all">All</string>
+    <string name="filter_long">Long (>60 min)</string>
+    <string name="filter_medium">Medium (31–60 min)</string>
+    <string name="filter_quick">Quick (≤30 min)</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="loading">Loading recipes…</string>
+    <string name="minutes">minutes</string>
+    <string name="nav_favorites">Favorites</string>
+    <string name="nav_recipes">Recipes</string>
+    <string name="nav_settings">Settings</string>
+    <string name="no_favorites">You have no favorite recipes</string>
+    <string name="no_favorites_hint">Mark recipes with the heart to save them here</string>
+    <string name="no_recipes">No recipes available</string>
+    <string name="no_results">No results found</string>
+    <string name="notes">Notes</string>
+    <string name="offline_mode">Offline mode - showing cached data</string>
+    <string name="pref_hide_no_time_summary">Don\'t show recipes without preparation time</string>
+    <string name="pref_hide_no_time_title">Hide without time</string>
+    <string name="pref_refresh_summary">How often to refresh recipes (hours)</string>
+    <string name="pref_refresh_title">Refresh interval</string>
+    <string name="pref_sort_summary">How to sort recipes when opening the app</string>
+    <string name="pref_sort_title">Default sort</string>
+    <string name="preparation">Preparation</string>
+    <string name="remove_favorite">Remove from favorites</string>
+    <string name="retry">Retry</string>
+    <string name="search_hint">Search recipe or restaurant…</string>
+    <string name="select_recipe">Select a recipe to view details</string>
+    <string name="settings_title">Settings</string>
+    <string name="share_as_text">Share as text</string>
+    <string name="share_recipe">Share recipe</string>
+    <string name="sort_name">By name</string>
+    <string name="sort_restaurant">By restaurant</string>
+    <string name="sort_time">By time</string>
+    <string name="time">Time</string>
+    <string name="tips">Tips and tricks</string>
+    <string name="view_restaurant">View restaurant</string>
+    <string name="webview_error">Could not load the page</string>
+</resources>

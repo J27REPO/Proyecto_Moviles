@@ -1,6 +1,5 @@
 package es.uniovi.recetasasturianas.data.remote.dto
 
-import android.util.Log
 import es.uniovi.recetasasturianas.data.model.Recipe
 import org.json.JSONObject
 
@@ -64,7 +63,7 @@ fun extractImageUrl(imagenContent: String?, slide: SlideWrapper?): String? {
         buildImageUrlFromJson(json)?.let { return it }
     }
     
-    slide?.slideUrl?.let { url ->
+    slide?.slideUrl?.content?.let { url ->
         if (url.isNotBlank()) {
             val fullUrl = if (url.startsWith("http")) url else "https://www.turismoasturias.es$url"
             return if (fullUrl.contains("?")) fullUrl else "$fullUrl?version=1.0"
@@ -87,10 +86,7 @@ private fun buildImageUrlFromJson(jsonString: String): String? {
 
         if (groupId.isNotEmpty() && uuid.isNotEmpty() && title.isNotEmpty()) {
             val encodedTitle = title.replace(" ", "%20")
-            // AQUÍ ESTÁ EL ARREGLO DE LAS IMÁGENES:
-            val url = "https://www.turismoasturias.es/documents/$groupId/0/$encodedTitle/$uuid?version=1.0"
-            Log.d("Mappers", "URL construida: $url")
-            url
+            "https://www.turismoasturias.es/documents/$groupId/0/$encodedTitle/$uuid?version=1.0"
         } else {
             null
         }

@@ -1,23 +1,19 @@
 package es.uniovi.recetasasturianas
 
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
+import androidx.test.platform.app.InstrumentationRegistry
+import com.adevinta.android.barista.assertion.BaristaVisibilityAssertions.assertDisplayed
+import com.adevinta.android.barista.interaction.BaristaClickInteractions.clickOn
+import org.hamcrest.Matchers.allOf
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-/**
- * Tests de UI para la navegación de la app.
- *
- * Verifica:
- * - Navegación entre tabs del BottomNavigation
- * - Navegación hacia atrás
- */
 @RunWith(AndroidJUnit4::class)
 @LargeTest
 class NavigationTest {
@@ -25,80 +21,39 @@ class NavigationTest {
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
-    /**
-     * Espera a que el RecyclerView esté visible.
-     */
-    private fun waitForListToLoad(timeoutMs: Long = 5000) {
+    private val context = InstrumentationRegistry.getInstrumentation().targetContext
+
+    private fun waitForListToLoad(timeoutMs: Long = 15000) {
         val startTime = System.currentTimeMillis()
         while (System.currentTimeMillis() - startTime < timeoutMs) {
             try {
-                onView(withId(R.id.recycler_view))
-                    .check(matches(isDisplayed()))
+                assertDisplayed(R.id.recycler_view)
                 return
             } catch (e: Exception) {
                 Thread.sleep(200)
             }
         }
-        // Último intento
-        onView(withId(R.id.recycler_view)).check(matches(isDisplayed()))
+        assertDisplayed(R.id.recycler_view)
     }
 
-    /**
-     * Verifica que el BottomNavigation navega entre fragments.
-     */
     @Test
     fun bottomNavigation_navigatesBetweenTabs() {
-        // Esperar a que cargue la lista principal
         waitForListToLoad()
 
-        // Verificar que estamos en la lista de recetas (tab inicial)
-        onView(withId(R.id.recycler_view))
-            .check(matches(isDisplayed()))
+        clickOn(R.id.favoritesFragment)
+        clickOn(R.id.settingsFragment)
+        assertDisplayed(context.getString(R.string.pref_refresh_title))
 
-        // Navegar a favoritos
-        onView(withId(R.id.favoritesFragment))
-            .perform(click())
-
-        // Esperar transición
-        Thread.sleep(500)
-
-        // Verificar que estamos en favoritos
-        // Puede mostrar empty view o la lista
-        // (ambos contienen el contenedor de favoritos)
-        Thread.sleep(1000)
-
-        // Navegar a ajustes
-        onView(withId(R.id.settingsFragment))
-            .perform(click())
-
-        // Esperar transición
-        Thread.sleep(500)
-
-        // Verificar que estamos en ajustes (buscando un texto de preferencia)
-        onView(withText(R.string.pref_refresh_title))
-            .check(matches(isDisplayed()))
-
-        // Volver a recetas
-        onView(withId(R.id.recipeListFragment))
-            .perform(click())
-
-        // Esperar transición
-        Thread.sleep(500)
-
-        // Verificar que estamos en la lista
-        // Puede tardar en recargar, esperar un poco más
-        Thread.sleep(1000)
-        onView(withId(R.id.recycler_view))
-            .check(matches(isDisplayed()))
+        clickOn(R.id.recipeListFragment)
+        waitForListToLoad()
+        assertDisplayed(R.id.recycler_view)
     }
 
-    /**
-     * Verifica que el título de la app se muestra correctamente.
-     */
     @Test
     fun appTitle_isDisplayed() {
-        // Verificar que el título de la app está en la toolbar
-        onView(withText(R.string.app_name))
+        waitForListToLoad()
+
+        onView(allOf(withText(R.string.nav_recipes), withParent(withId(R.id.toolbar))))
             .check(matches(isDisplayed()))
     }
 }

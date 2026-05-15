@@ -11,6 +11,8 @@ import android.webkit.WebViewClient
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import es.uniovi.recetasasturianas.MainActivity
+import es.uniovi.recetasasturianas.R
 import es.uniovi.recetasasturianas.databinding.FragmentWebViewBinding
 
 /**
@@ -38,9 +40,13 @@ class RestaurantWebViewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Obtener URL de los argumentos
+        // En modo telefono (no tablet), ocultar la toolbar principal para evitar duplicados
+        if (activity?.findViewById<View>(R.id.detail_container) == null) {
+            (activity as? MainActivity)?.hideToolbar()
+        }
+
         url = arguments?.getString("url")
-        
+
         setupToolbar()
         setupWebView()
         loadUrl()
@@ -55,27 +61,19 @@ class RestaurantWebViewFragment : Fragment() {
     private fun setupWebView() {
         binding.webView.apply {
             settings.apply {
-                // Habilitar JavaScript para sitios que lo necesitan
                 javaScriptEnabled = true
-                // Soporte para zoom
                 setSupportZoom(true)
                 builtInZoomControls = true
                 displayZoomControls = false
-                // Caché
                 domStorageEnabled = true
-                // Cargar imágenes automáticamente
                 loadsImagesAutomatically = true
             }
 
-            // WebViewClient personalizado para:
-            // 1. Evitar que se abra el navegador externo
-            // 2. Manejar errores de carga
             webViewClient = object : WebViewClient() {
                 override fun shouldOverrideUrlLoading(
                     view: WebView?,
                     request: WebResourceRequest?
                 ): Boolean {
-                    // No sobrescribir, cargar dentro del WebView
                     return false
                 }
 
@@ -112,6 +110,10 @@ class RestaurantWebViewFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        // Restaurar la toolbar principal al salir
+        if (activity?.findViewById<View>(R.id.detail_container) == null) {
+            (activity as? MainActivity)?.showToolbar()
+        }
         binding.webView.apply {
             stopLoading()
             settings.javaScriptEnabled = false
