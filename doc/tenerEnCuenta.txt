@@ -1,0 +1,4 @@
+minimo sdk 26, justificar si se usa una api mayor a la 26. 
+Usar moshi en vez de gson. 
+Espresso para pruebas de interfaz de usuario.
+documento Word que explique el proyecto. 
